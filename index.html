@@ -33,7 +33,40 @@
   
 </style>
 <script>
+  
+  function changeSeason(classVal){
+    var season_sub = document.getElementById("season");
+    var option = document.createElement('option');
+    var option_sub = document.createElement('option');
+    
+    while(season_sub.lastChild){
+      season_sub.removeChild(season_sub.lastChild);
+    }
+    
+    if(classVal == "sc"){
+      console.log(classVal);
+      option.innerHTML = "春試験";
+      option.value = "1";
+      season_sub.appendChild(option);
+      option_sub.innerHTML = "秋試験";
+      option_sub.value = "2";
+      season_sub.appendChild(option_sub);
+      return;
+    }
+    
+    if(classVal == "au" || classVal == "es" || classVal == "db" || classVal == "pm"){
+      option.innerHTML = "春試験";
+      option.value = "1";
+      
+    } else {
+      option.innerHTML = "秋試験";
+      option.value = "1";
+    }
+    season_sub.appendChild(option);
+  }
+  
   function pdflink(){
+    
   var year = document.getElementById("year").value;
   var year_sub = year;
   var season1 = document.getElementById("season").value;
@@ -90,10 +123,10 @@
       <option value="2020r02">2020</option>
       <option value="2021r03">2021</option>
     </select>
-  </label>
+  </label>  
   <label>
     <span>試験区分</span>
-    <select id="class1">
+    <select id="class1" onchange="changeSeason(this.value)">
       <option value="sc">情報処理安全確保支援士試験</option>
       <option value="au">システム監査技術者試験</option>
       <option value="es">エンベデッドシステムスペシャリスト試験</option>
@@ -102,8 +135,7 @@
       <option value="st">ITストラテジスト試験</option>
       <option value="sa">システムアーキテクト試験</option>
       <option value="nw">ネットワークスペシャリスト試験</option>
-      <option value="sm">ITサービスマネージャ試験</option>
-    </select>
+      <option value="sm">ITサービスマネージャ試験</option>    </select>
   </label>
   <label>
     <span>分類</span>
@@ -111,7 +143,7 @@
       <option value="1">春試験</option>
       <option value="2">秋試験</option>
     </select>
-  </label>  
+  </label>
   <label>
     <span>テスト区分</span>
     <select id="class2">
