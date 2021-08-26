@@ -1,0 +1,130 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  
+  select {
+    font-size:20px;
+  }
+  
+  span {
+    font-size:20px;
+  }
+  
+  label {
+    border:2px solid #555555;
+    display: inline-block;
+    padding: 5px;
+    height: 30px;
+  }
+  
+  select {
+    background-color: #999999;
+    color: #ffffff;
+  }
+  
+  button {
+    width: 200px;
+    height: 30px;
+    margin-top: 20px;
+    font-size: 15px;
+  }
+  
+</style>
+<script>
+  function pdflink(){
+  var year = document.getElementById("year").value;
+  var year_sub = year;
+  var season1 = document.getElementById("season").value;
+  var class1 = document.getElementById("class1").value;
+  var class2 = document.getElementById("class2").value;
+  var qa = document.getElementById("qa").value;
+  var season2 = null;
+  var link_name = null;
+  
+  if(season1 == "1"){
+    season2 = "h"; 
+  } else {
+    season2 = "a";
+  }
+  
+  //なんで前半は平成で後半は令和なの？
+  if(year == "2019h31" && season1 == "2"){
+    year_sub = "2019r01";
+  }
+  
+  //特殊開催はファイル名変わるのね、他にもあるかも？
+  if(year == "2020r02"){
+    season1 = "oct";
+    season2 = "o";
+  }
+
+  //午前Ⅰは高度で共通みたいね
+  if(class2 == "koudo_am1"){
+    link_name = "https://www.jitec.ipa.go.jp/1_04hanni_sukiru/mondai_kaitou_" + year + "_" + season1 + "/" + year_sub + season2 + "_" + class2 + "_" + qa + ".pdf";  
+  } else {
+  link_name = "https://www.jitec.ipa.go.jp/1_04hanni_sukiru/mondai_kaitou_" + year + "_" + season1 + "/" + year_sub + season2 + "_" + class1 + "_" + class2 + "_" + qa + ".pdf";
+  }
+    window.open(link_name,'_blank');
+  }
+</script>
+</head>
+<body>
+<h1>IPA過去問PDFリンク</h1>
+<div>
+  <label>
+    <span>年</span>
+    <select id="year">
+      <option value="2009h21">2009</option>
+      <option value="2010h22">2010</option>
+      <option value="2011h23">2011</option>
+      <option value="2012h24">2012</option>
+      <option value="2013h25">2013</option>
+      <option value="2014h26">2014</option>
+      <option value="2015h27">2015</option>
+      <option value="2016h28">2016</option>
+      <option value="2017h29">2017</option>
+      <option value="2018h30">2018</option>
+      <option value="2019h31">2019</option>
+      <option value="2020r02">2020</option>
+      <option value="2021r03">2021</option>
+    </select>
+  </label>
+    <label>
+    <span>分類</span>
+    <select id="season">
+      <option value="1">春試験</option>
+      <option value="2">秋試験</option>
+    </select>
+  </label>  
+  <label>
+    <span>試験区分</span>
+    <select id="class1">
+      <option value="sc">情報処理安全確保支援士試験</option>
+      <option value="au">システム監査技術者試験</option>
+      <option value="es">エンベデッドシステムスペシャリスト試験</option>
+      <option value="db">データベーススペシャリスト試験</option>
+      <option value="pm">プロジェクトマネージャ試験</option>
+    </select>
+  </label>
+  <label>
+    <span>テスト区分</span>
+    <select id="class2">
+      <option value="koudo_am1">午前Ⅰ</option>
+      <option value="am2">午前Ⅱ</option>
+      <option value="pm1">午後Ⅰ</option>
+      <option value="pm2">午後Ⅱ</option>
+    </select>
+  </label>  
+  <label>
+    <span>QA</span>
+    <select id="qa">
+      <option value="qs">問題</option>
+      <option value="ans">解答</option>
+    </select>
+  </label>  
+</div>
+<button onclick="pdflink()">リンク</button>
+</body>
+</html>
